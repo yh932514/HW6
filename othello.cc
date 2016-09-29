@@ -1,13 +1,15 @@
-// Brock Ferrell
-// CS2401
-// November 23, 2015
-// Project7
+/** @file othello.cc (part of the namespace main_savitch_14)
+ * @author Brock Ferrell
+ * @date November 23, 2015
+ * @brief The othello class displays the checkboard all the time during gaming
+ *  and determinates whether the game is over or not.
+ */
 
 #include "othello.h"
 
 namespace main_savitch_14
 {
-
+/* This function displays the checkboas as the computer and user move their pieces. */
 void Othello::display_status()const
 {
   cout << BLUE << "   _______ _______ _______ _______ _______ _______ _______ _______\n";

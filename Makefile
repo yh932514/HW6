@@ -1,6 +1,6 @@
-all : build archive
+all : doc build
 
-build:  a.out
+build: a.out config
 
 a.out: main.o game.o othello.o
 	g++ main.o game.o othello.o -o a.out
@@ -10,7 +10,15 @@ othello.o : othello.h othello.cc
 	g++ -c othello.cc
 main.o : main.cc game.h othello.h
 	g++ -c main.cc
+doc: 	
+	doxygen -g config
+	doxygen config
+
+config: 
+	doxygen -u config
+	doxygen config
+
 clean:
-	-rm -f *.o a.out	
+	rm -rf html/ latex/ *.o a.out config config.bak
 archive:
 	tar -cvf file.tar *

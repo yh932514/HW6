@@ -1,4 +1,8 @@
-// File: game.cxx
+/** @file game.cc
+ * @author Brock Ferrell
+ * @date November 23, 2015
+ * @brief The game clss makes the computer and user play in turns.
+ */
 
 #include <cassert>    // Provides assert
 #include <climits>    // Provides INT_MAX and INT_MIN
@@ -7,20 +11,20 @@
 #include <string>     // Provides string
 #include "game.h"     // Provides definition of game class
 using namespace std;
-
+/*
+ * STATIC MEMBER CONSTANTS
+ * const int game::SEARCH_LEVELS;
+ * PUBLIC MEMBER FUNCTIONS
+ */
 namespace main_savitch_14
 {
-//*************************************************************************
-// STATIC MEMBER CONSTANTS
-// const int game::SEARCH_LEVELS;
-
-//*************************************************************************
-// PUBLIC MEMBER FUNCTIONS
-
+/** The play function should not be overridden. It plays one round of the
+ * game, with the human player moving first and the computer second.
+ * The return value is the winner of the game (or NEUTRAL for a tie).
+ * @return winner or NEUTRAL
+ */
 game::who game::play( )
-// The play function should not be overridden. It plays one round of the
-// game, with the human player moving first and the computer second.
-// The return value is the winner of the game (or NEUTRAL for a tie).
+
 {
 	restart( );
 
@@ -42,14 +46,18 @@ game::who game::play( )
 
 
 
-//*************************************************************************
-// OPTIONAL VIRTUAL FUNCTIONS (overriding these functions is optional)
-
+/** OPTIONAL VIRTUAL FUNCTIONS (overriding these functions is optional)
+ * This function outouts message to user.
+ * @param[in] const string& message
+ */
 void game::display_message(const string& message) const
 {
 	cout << message;
 }
-
+/** OPTIONAL VIRTUAL FUNCTIONS (overriding these functions is optional)
+ * This function tells user to move and gets the user's move
+ * @return answer
+ */
 string game::get_user_move( ) const
 {
 	string answer;
@@ -59,7 +67,10 @@ string game::get_user_move( ) const
 	getline(cin, answer);
 	return answer;
 }
-
+/** OPTIONAL VIRTUAL FUNCTIONS (overriding these functions is optional)
+ * This function output the winner 
+ * @return winner or NEUTRAL
+ */
 game::who game::winning()const {
 
 	int value = evaluate();
@@ -74,16 +85,16 @@ game::who game::winning()const {
 
 }
 
-//*************************************************************************
-// PRIVATE FUNCTIONS (these are the same for every game)
-
+/** PRIVATE FUNCTIONS (these are the same for every game) 
+ * This function evaluates a board position with lookahead.
+ * current board position can't beat this, then cut it short.
+ * The return value is large if the position is good for the player who just
+ * moved.
+ * @param[in] int look_aheads:  How deep the lookahead should go to evaluate the move.
+ * @param[in] int beat_this: Value of another move that we're considering. If the
+ */
 int game::eval_with_lookahead(int look_ahead, int beat_this)
-// Evaluate a board position with lookahead.
-// --int look_aheads:  How deep the lookahead should go to evaluate the move.
-// --int beat_this: Value of another move that we're considering. If the
-// current board position can't beat this, then cut it short.
-// The return value is large if the position is good for the player who just
-// moved.
+
 {
 	queue<string> moves;   // All possible opponent moves
 	int value;             // Value of a board position after opponent moves
@@ -124,7 +135,11 @@ int game::eval_with_lookahead(int look_ahead, int beat_this)
 	// The answer we return should be from player's perspective, so multiply times -1:
 	return -best_value;
 }
-
+/** PRIVATE FUNCTIONS (these are the same for every game) 
+ * This function calls other function to compute all legal moves that the computer could make
+ * and evaluate each possible legal move, then it saves the index of the best
+ * in best_index and saving its value in best_value. At last, make the best move.
+ */
 void game::make_computer_move( )
 {
 	queue<string> moves;
@@ -157,7 +172,10 @@ void game::make_computer_move( )
 	// Make the best move.
 	make_move(best_move);
 }
-
+/** PRIVATE FUNCTIONS (these are the same for every game) 
+ * This function gets the user's move and calls other funtion to determinate whether is a legal move or not.
+ * Then make move.
+ */
 void game::make_human_move( ) {
 	string move;
 

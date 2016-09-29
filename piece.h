@@ -1,7 +1,9 @@
-// Brock Ferrell
-// CS2401
-// November 23, 2015
-// Project7
+/** @file piece.h
+ * @author Brock Ferrell
+ * @date November 23, 2015
+ * @brief The piece class gives computer and user different colors pieces
+ * and changes pieces color when they move.
+ */
 
 #ifndef PIECE_H
 #define PIECE_H
@@ -11,6 +13,7 @@ class piece {
 public:
 	piece() {theColor = blank;}
 
+/** This function change pieces color when some one moved. */
 	void flip()
 	{
 		if (theColor == white) {

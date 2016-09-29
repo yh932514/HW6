@@ -1,7 +1,8 @@
-// Brock Ferrell
-// CS2401
-// November 23, 2015
-// Project7
+/** @file othello.cc (part of the namespace main_savitch_14)
+ * @author Brock Ferrell
+ * @date November 23, 2015
+ * @brief main starts the game and play. 
+ */
 
 #include "game.h"
 #include "othello.h"
